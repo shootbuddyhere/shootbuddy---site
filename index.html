@@ -411,7 +411,7 @@ button{
 /* college toggle */
 #collegeBlock.hidden{display:none}
 
-/* modal */
+/* modal (kept, but not used until Formspree works) */
 .modal-overlay{
   position:fixed;
   inset:0;
@@ -444,14 +444,12 @@ button{
 }
 .modal h2{margin-bottom:4px;font-size:1.05rem}
 .modal p{margin-top:6px;font-size:.8rem;color:var(--muted)}
-
 .modal-tier{
   margin-top:10px;
   margin-bottom:4px;
   font-size:.75rem;
   color:var(--neon-soft);
 }
-
 .tier-badge{
   display:inline-flex;
   align-items:center;
@@ -559,13 +557,11 @@ footer{
       </div>
     </div>
 
-    <!-- FORM POSTS DIRECTLY TO GOOGLE APPS SCRIPT -->
+    <!-- SIMPLE FORMSPREE FORM FOR TESTING -->
     <form
       id="creatorForm"
-      novalidate
       method="POST"
-      action="https://script.google.com/macros/s/AKfycbzplgn5rbmsHya6-FC43v5OpPnt6ko9Me-FBnpKTC5-n0zQz3HGCbjGAEne8R6DMOvmug/exec"
-      target="hidden_iframe"
+      action="https://formspree.io/f/mnjaqjjn"
     >
       <div class="section-line"><span>Personal</span></div>
 
@@ -625,39 +621,27 @@ footer{
       <label for="iphoneModel">iPhone Model</label>
       <select id="iphoneModel" name="iphoneModel" required>
         <option value="" hidden selected>Select your exact iPhone</option>
-
-        <!-- iPhone 17 family -->
         <option value="17">iPhone 17</option>
         <option value="17-pro">iPhone 17 Pro</option>
         <option value="17-pro-max">iPhone 17 Pro Max</option>
         <option value="air">iPhone Air</option>
-
-        <!-- iPhone 16 family -->
         <option value="16">iPhone 16</option>
         <option value="16-plus">iPhone 16 Plus</option>
         <option value="16-pro">iPhone 16 Pro</option>
         <option value="16-pro-max">iPhone 16 Pro Max</option>
         <option value="16e">iPhone 16e</option>
-
-        <!-- iPhone 15 family -->
         <option value="15">iPhone 15</option>
         <option value="15-plus">iPhone 15 Plus</option>
         <option value="15-pro">iPhone 15 Pro</option>
         <option value="15-pro-max">iPhone 15 Pro Max</option>
-
-        <!-- iPhone 14 family -->
         <option value="14">iPhone 14</option>
         <option value="14-plus">iPhone 14 Plus</option>
         <option value="14-pro">iPhone 14 Pro</option>
         <option value="14-pro-max">iPhone 14 Pro Max</option>
-
-        <!-- iPhone 13 family -->
         <option value="13-mini">iPhone 13 mini</option>
         <option value="13">iPhone 13</option>
         <option value="13-pro">iPhone 13 Pro</option>
         <option value="13-pro-max">iPhone 13 Pro Max</option>
-
-        <!-- SE -->
         <option value="se-3">iPhone SE (3rd Gen)</option>
       </select>
 
@@ -725,37 +709,21 @@ footer{
         <option>Earn, Learn &amp; Network</option>
       </select>
 
-      <button type="button" id="tierButton">CALCULATE MY TIER ⚡</button>
+      <!-- For now: normal submit so you see Formspree thank-you page -->
+      <button type="submit">CALCULATE MY TIER ⚡</button>
     </form>
   </div>
 
 </div>
 
-<div class="modal-overlay" id="modal">
-  <div class="modal">
-    <h2>Your creator tier is ready</h2>
-    <div class="tier-badge" id="tierBadge">TIER MATCHED</div>
-    <div class="modal-tier" id="tierText">You’ll be added to the right WhatsApp community based on your answers.</div>
-    <p>Tap below to join the Shoot Buddy community and start getting matched to real shoots.</p>
-    <button onclick="window.open('https://chat.whatsapp.com/Huufo2mT8Fi5ZCrifn2s9K','_blank')">
-      JOIN WHATSAPP COMMUNITY
-    </button>
-  </div>
-</div>
+<!-- modal + script kept but not currently triggered -->
 
 <footer>SHOOT BUDDY · CREATOR POWERHOUSE · 2025</footer>
 </div>
 
-<!-- hidden iframe for Sheets POST -->
-<iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
-
 <script>
 const collegeStatus = document.getElementById("collegeStatus");
 const collegeBlock  = document.getElementById("collegeBlock");
-const form          = document.getElementById("creatorForm");
-const tierButton    = document.getElementById("tierButton");
-const tierBadge     = document.getElementById("tierBadge");
-const tierText      = document.getElementById("tierText");
 
 collegeStatus.addEventListener("change", () => {
   if (collegeStatus.value === "student") {
@@ -764,38 +732,6 @@ collegeStatus.addEventListener("change", () => {
     collegeBlock.classList.add("hidden");
   }
 });
-
-// simple tier logic
-function detectTier(){
-  const experience = document.getElementById("editingExperience").value;
-  const paidWork   = document.getElementById("paidWork").value;
-
-  if (experience === "Above 1 year" && paidWork === "Yes, regularly") {
-    return "Tier 1 · Premium creators";
-  }
-  if (experience !== "" && paidWork !== "Not yet") {
-    return "Tier 2 · Growth creators";
-  }
-  return "Tier 3 · Learn & earn creators";
-}
-
-tierButton.addEventListener("click", () => {
-  if (!form.reportValidity()) return;
-
-  const tierLabel = detectTier();
-  tierBadge.textContent = tierLabel.toUpperCase();
-  tierText.textContent  = "You’ve been placed in " + tierLabel + ". Join the WhatsApp community to start getting matched.";
-
-  // submit form to Google Sheets (hidden iframe)
-  form.submit();
-
-  // show modal immediately
-  openModal();
-});
-
-function openModal(){
-  document.getElementById("modal").classList.add("active");
-}
 </script>
 
 </body>
