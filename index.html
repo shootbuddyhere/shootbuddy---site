@@ -7,7 +7,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-/* ================= ROOT ================= */
 :root{
   --bg:#020309;
   --bg-elevated:#050712;
@@ -28,198 +27,775 @@
   --glass:rgba(10,12,30,.88);
 }
 
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%}
+*,*::before,*::after{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html,body{height:100%;}
 
 body{
   background:
-    radial-gradient(circle at -10% 0%,rgba(182,255,0,.18),transparent 55%),
-    radial-gradient(circle at 110% 10%,rgba(102,212,255,.18),transparent 55%),
-    radial-gradient(circle at 0% 100%,rgba(255,102,212,.14),transparent 55%),
+    radial-gradient(circle at -10% 0%,rgba(182,255,0,.18) 0,transparent 55%),
+    radial-gradient(circle at 110% 10%,rgba(102,212,255,.18) 0,transparent 55%),
+    radial-gradient(circle at 0% 100%,rgba(255,102,212,.14) 0,transparent 55%),
+    radial-gradient(circle at 70% 130%,rgba(182,255,0,.14) 0,transparent 55%),
     var(--bg);
   color:var(--text);
   font-family:Manrope,sans-serif;
   overflow-x:hidden;
 }
 
-/* ================= HEADER ================= */
+body::before{
+  content:"";
+  position:fixed;
+  inset:-40px;
+  background-image:
+    radial-gradient(circle at 15% 20%,rgba(255,255,255,.09),transparent 55%),
+    linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);
+  background-size:480px 480px,80px 80px,80px 80px;
+  mix-blend-mode:soft-light;
+  opacity:.24;
+  pointer-events:none;
+  z-index:0;
+}
+
+.page-shell{position:relative;z-index:1}
+
+/* header */
 header{
-  position:sticky;top:0;z-index:20;
+  position:sticky;
+  top:0;
+  z-index:20;
   backdrop-filter:blur(18px);
-  background:rgba(2,3,9,.9);
+  background:linear-gradient(to bottom,rgba(2,3,9,.96),rgba(2,3,9,.9));
   border-bottom:1px solid rgba(148,163,255,.18);
 }
+
 .nav{
-  max-width:1200px;margin:auto;
+  max-width:1200px;
+  margin:auto;
   padding:10px 14px;
-  display:flex;justify-content:space-between;align-items:center;
-}
-.logo{
-  width:40px;height:40px;border-radius:14px;
-  background:#b6ff00;color:#000;
-  font-weight:800;display:flex;
-  align-items:center;justify-content:center;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 }
 
-/* ================= HERO ================= */
+.nav-left{display:flex;gap:10px;align-items:center}
+
+.logo-wrap{
+  padding:2px;
+  border-radius:16px;
+  background:conic-gradient(from 160deg,#b6ff00,#66d4ff,#ff66d4,#b6ff00);
+}
+
+.logo{
+  width:40px;height:40px;
+  border-radius:14px;
+  background:radial-gradient(circle at 20% 0%,#fdfdfd,#eaff8a 40%,#b6ff00 100%);
+  color:#05060a;
+  font-weight:800;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 10px 30px rgba(182,255,0,.45);
+  font-size:.85rem;
+}
+
+.brand-text{display:flex;flex-direction:column;gap:1px}
+.brand-text strong{font-size:.7rem;letter-spacing:.22em;color:var(--muted)}
+.brand-text span{font-size:.65rem;color:var(--muted-soft)}
+
+.nav-pill{
+  padding:7px 12px;
+  border-radius:999px;
+  border:1px solid rgba(148,163,255,.28);
+  background:radial-gradient(circle at 0 0,rgba(182,255,0,.18),transparent 55%),
+             rgba(8,10,28,.96);
+  font-size:.6rem;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--muted);
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+
+.nav-dot{
+  width:6px;height:6px;
+  border-radius:999px;
+  background:radial-gradient(circle,#6bff59,#b6ff00);
+  box-shadow:0 0 10px rgba(182,255,0,.9);
+}
+
+/* hero */
 .hero{
-  max-width:700px;margin:auto;
-  padding:40px 18px;text-align:center;
+  max-width:700px;
+  margin:0 auto;
+  padding:40px 18px 32px;
+  position:relative;
 }
+.hero-inner{text-align:center}
+.hero-orbit{
+  position:absolute;
+  inset:30px 0 auto;
+  max-width:520px;
+  margin:0 auto;
+  opacity:.25;
+  filter:blur(40px);
+  background:radial-gradient(circle at 50% 0%,rgba(182,255,0,1) 0,transparent 55%);
+  z-index:-1;
+}
+
+.hero-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:7px 14px;
+  border-radius:999px;
+  border:1px solid rgba(182,255,0,.45);
+  background:linear-gradient(135deg,rgba(182,255,0,.09),rgba(12,16,40,.9));
+  font-size:.6rem;
+  letter-spacing:.22em;
+  font-weight:700;
+  text-transform:uppercase;
+  color:var(--neon-soft);
+}
+
+.hero-eyebrow{
+  margin-top:14px;
+  font-size:.7rem;
+  text-transform:uppercase;
+  letter-spacing:.16em;
+  color:var(--muted-soft);
+}
+
 .hero h1{
-  font-size:2rem;font-weight:800;
+  font-size:1.8rem;
+  line-height:1.05;
+  margin:14px 0 12px;
+  font-weight:800;
+  letter-spacing:-.05em;
 }
-.hero span{
+
+@media(min-width:480px){
+  .hero h1{font-size:2.2rem;}
+}
+
+.hero h1 span{
   background:linear-gradient(120deg,#b6ff00,#66d4ff);
   -webkit-background-clip:text;
+  background-clip:text;
   color:transparent;
+  text-shadow:0 0 32px rgba(102,212,255,.35);
 }
 
-/* ================= CONTAINER ================= */
-.container{max-width:760px;margin:auto;padding:16px}
+.hero p{
+  max-width:520px;
+  margin:0 auto;
+  color:var(--muted);
+  font-size:.9rem;
+  line-height:1.6;
+}
 
-/* ================= FORM ================= */
+.hero-sub{
+  margin-top:6px;
+  font-size:.75rem;
+  color:var(--muted-soft);
+}
+
+.tags{
+  margin-top:20px;
+  display:flex;
+  gap:8px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+.tag{
+  padding:7px 12px;
+  border-radius:999px;
+  border:1px solid rgba(148,163,255,.16);
+  background:radial-gradient(circle at 0 0,rgba(182,255,0,.12),transparent 60%),
+             rgba(7,9,25,.94);
+  font-size:.7rem;
+  color:var(--muted);
+}
+.tag span{color:var(--neon-soft)}
+
+/* container */
+.container{
+  max-width:760px;
+  margin:0 auto;
+  padding:0 16px 32px;
+}
+
+/* tiers */
+.tiers{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:16px;
+  margin:6px 0 30px;
+}
+@media(min-width:680px){
+  .tiers{grid-template-columns:repeat(3,minmax(0,1fr));}
+}
+
+.tier{
+  border-radius:var(--radius-lg);
+  padding:20px 18px 16px;
+  background:linear-gradient(135deg,rgba(10,12,30,.92),rgba(5,7,18,.98));
+  border:1px solid rgba(148,163,255,.18);
+  box-shadow:0 14px 40px rgba(0,0,0,.75);
+}
+.tier-label{
+  font-size:.65rem;
+  text-transform:uppercase;
+  letter-spacing:.2em;
+  color:var(--muted-soft);
+}
+.tier h3{margin:6px 0 4px;font-size:1rem}
+.tier-1 h3{color:#d4ff5a}
+.tier-2 h3{color:#8ae1ff}
+.tier-3 h3{color:#ffb3e8}
+.tier p{font-size:.78rem;color:var(--muted)}
+.tier-meta{
+  margin-top:10px;
+  font-size:.72rem;
+  color:var(--muted-soft);
+}
+
+/* main card */
 .card{
   background:var(--glass);
-  border-radius:28px;
+  border-radius:var(--radius-xl);
   border:1px solid rgba(148,163,255,.22);
-  padding:24px;
+  padding:22px 18px 24px;
+  margin:0 auto 28px;
   box-shadow:var(--shadow-soft);
+  backdrop-filter:blur(22px) saturate(130%);
 }
-label{display:block;margin-top:12px;font-size:.8rem}
-input,select{
-  width:100%;padding:12px;
-  border-radius:18px;
-  border:1px solid #1f294f;
-  background:#0a0c20;
-  color:#fff;
+@media(min-width:600px){
+  .card{padding:30px 26px 30px;}
 }
 
-button{
-  width:100%;margin-top:20px;
-  padding:14px;border-radius:999px;
-  border:none;
-  background:#b6ff00;
-  font-weight:800;
+.card-header{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  align-items:flex-start;
+  margin-bottom:12px;
+}
+.card-title{display:flex;flex-direction:column;gap:4px}
+.card-title h3{font-size:1rem}
+.card-title span{font-size:.75rem;color:var(--muted-soft)}
+.card-pill{
+  padding:6px 10px;
+  border-radius:999px;
+  border:1px solid rgba(182,255,0,.5);
+  font-size:.6rem;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--neon-soft);
+  display:flex;
+  align-items:center;
+}
+
+/* section line */
+.section-line{
+  margin-top:22px;
+  margin-bottom:6px;
+  padding-top:14px;
+  border-top:1px solid rgba(148,163,255,.22);
+  font-size:.68rem;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--muted-soft);
+}
+
+/* form */
+label{
+  display:block;
+  margin-top:10px;
+  margin-bottom:4px;
+  font-size:.78rem;
+  font-weight:600;
+  color:#e5e7f5;
+}
+label span.helper{
+  font-weight:400;
+  color:var(--muted-soft);
+  margin-left:4px;
+  font-size:.7rem;
+}
+
+input,select{
+  width:100%;
+  padding:11px 13px;
+  border-radius:var(--radius-md);
+  border:1px solid rgba(31,41,79,.75);
+  background:rgba(10,12,32,.96);
+  color:#f9fbff;
+  font-size:.86rem;
+  outline:none;
+  transition:border .18s ease,box-shadow .18s ease,background .18s ease,transform .12s ease;
+  box-shadow:inset 0 0 0 1px rgba(15,23,42,.65);
+}
+
+input::placeholder{color:var(--muted-soft)}
+
+input:focus,select:focus{
+  border-color:var(--neon-soft);
+  box-shadow:0 0 0 1px rgba(182,255,0,.4),0 0 24px rgba(182,255,0,.22);
+  background:rgba(12,16,40,.98);
+  transform:translateY(-1px);
+}
+
+/* select placeholder behaviour */
+select:required:invalid{
+  color:var(--muted-soft);
+}
+select option{color:#f9fbff;}
+select option[hidden]{color:#f9fbff;}
+
+/* grid */
+.grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:10px;
+}
+@media(min-width:520px){
+  .grid{grid-template-columns:1fr 1fr;}
+}
+
+/* check grid */
+.check-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+  gap:8px;
+  margin-top:4px;
+}
+.check{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  padding:9px 8px;
+  border-radius:var(--radius-md);
+  border:1px solid rgba(31,41,79,.9);
+  background:radial-gradient(circle at 0 0,rgba(182,255,0,.08),transparent 60%),
+             rgba(10,12,32,.96);
+  font-size:.75rem;
+  color:var(--muted);
   cursor:pointer;
 }
+.check input{width:auto;accent-color:var(--neon);cursor:pointer}
 
-/* ================= MODAL ================= */
-.modal-overlay{
-  position:fixed;inset:0;
-  background:rgba(0,0,0,.8);
-  display:none;
-  align-items:center;justify-content:center;
-}
-.modal-overlay.active{display:flex}
-.modal{
-  background:#070815;
-  padding:24px;border-radius:24px;
-  text-align:center;
-}
-.tier-badge{
-  margin:12px auto;
-  padding:10px 20px;
+/* button */
+button{
+  width:100%;
+  margin-top:22px;
+  padding:13px 14px;
   border-radius:999px;
-  border:2px solid #b6ff00;
-  color:#b6ff00;
+  border:none;
+  background:linear-gradient(135deg,#b6ff00,#eaff8a);
+  color:#020309;
+  font-weight:800;
+  letter-spacing:.16em;
+  font-size:.75rem;
+  text-transform:uppercase;
+  cursor:pointer;
+  box-shadow:0 14px 40px rgba(182,255,0,.58);
+}
+
+/* college toggle */
+#collegeBlock.hidden{display:none}
+
+/* modal */
+.modal-overlay{
+  position:fixed;
+  inset:0;
+  background:radial-gradient(circle at 20% 0%,rgba(182,255,0,.45),transparent 55%),
+             rgba(2,3,9,.96);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .22s ease;
+  z-index:40;
+}
+.modal-overlay.active{
+  opacity:1;
+  pointer-events:auto;
+}
+
+.modal{
+  background:radial-gradient(circle at 0 0,rgba(182,255,0,.12),transparent 55%),
+             rgba(7,9,25,.98);
+  border-radius:24px;
+  border:1px solid rgba(148,163,255,.28);
+  padding:24px 18px 20px;
+  text-align:center;
+  max-width:360px;
+  width:92%;
+  box-shadow:var(--shadow-soft);
+  backdrop-filter:blur(22px);
+}
+.modal h2{margin-bottom:4px;font-size:1.05rem}
+.modal p{margin-top:6px;font-size:.8rem;color:var(--muted)}
+
+.modal-tier{
+  margin-top:10px;
+  margin-bottom:4px;
+  font-size:.75rem;
+  color:var(--neon-soft);
+}
+
+.tier-badge{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  margin:12px 0 4px;
+  padding:9px 16px;
+  border-radius:999px;
+  font-weight:800;
+  border:2px solid var(--neon-soft);
+  color:var(--neon-soft);
+  font-size:.72rem;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  background:rgba(8,10,28,.96);
+}
+
+/* footer */
+footer{
+  text-align:center;
+  padding:26px 16px 32px;
+  color:var(--muted-soft);
+  font-size:.7rem;
 }
 </style>
 </head>
 
 <body>
-
+<div class="page-shell">
 <header>
   <div class="nav">
-    <div class="logo">SB</div>
-    <strong>Shoot Buddy</strong>
+    <div class="nav-left">
+      <div class="logo-wrap">
+        <div class="logo">SB</div>
+      </div>
+      <div class="brand-text">
+        <strong>SHOOT BUDDY · CREATOR ENGINE</strong>
+        <span>High-signal paid shoots for iPhone editors</span>
+      </div>
+    </div>
+    <div class="nav-pill">
+      <div class="nav-dot"></div>
+      <span>COIMBATORE · IPHONE ONLY</span>
+    </div>
   </div>
 </header>
 
 <section class="hero">
-  <h1>Turn your iPhone into a <span>money-making machine</span></h1>
-  <p>Fill once. Get matched. Get paid.</p>
+  <div class="hero-orbit"></div>
+  <div class="hero-inner">
+    <div class="hero-badge">
+      <span>⚡</span>
+      <span>TURN YOUR IPHONE INTO CASHFLOW</span>
+    </div>
+    <div class="hero-eyebrow">CREATOR TIER MATCHING • REAL BRANDS • REAL MONEY</div>
+    <h1>Turn your iPhone into a <span>money‑making machine</span></h1>
+    <p>Fill this once. You’ll get matched to the right creator tier and pushed into a curated WhatsApp community for your exact skill level.</p>
+    <p class="hero-sub">No random broadcast groups. Only filtered opportunities that match your gear, skills, and time.</p>
+    <div class="tags">
+      <div class="tag"><span>Real shoots</span> · Paid work</div>
+      <div class="tag">Tier 1 · Tier 2 · Tier 3</div>
+      <div class="tag">Students from Coimbatore</div>
+      <div class="tag">Skill‑based matching</div>
+    </div>
+  </div>
 </section>
 
 <div class="container">
+
+  <div class="tiers">
+    <div class="tier tier-1">
+      <div class="tier-label">Tier 1</div>
+      <h3>Premium creators</h3>
+      <p>Editors who can walk into brand shoots today and deliver scroll‑stopping content without hand‑holding.</p>
+      <div class="tier-meta">
+        Brand‑ready, high‑priority shoots with the strongest pay and fastest growth.
+      </div>
+    </div>
+    <div class="tier tier-2">
+      <div class="tier-label">Tier 2</div>
+      <h3>Growth creators</h3>
+      <p>Close to premium. You understand cuts, pacing, hooks and can follow creative direction for most local brands.</p>
+      <div class="tier-meta">
+        Guided growth with strong earnings and feedback to push you into Tier 1.
+      </div>
+    </div>
+    <div class="tier tier-3">
+      <div class="tier-label">Tier 3</div>
+      <h3>Learn &amp; earn creators</h3>
+      <p>Just getting started. Perfect for real briefs, campus events and friendly practice shoots.</p>
+      <div class="tier-meta">
+        Learn, earn and stack a portfolio as you move towards higher‑tier brand work.
+      </div>
+    </div>
+  </div>
+
   <div class="card">
-    <form id="creatorForm" novalidate>
+    <div class="card-header">
+      <div class="card-title">
+        <h3>Creator details</h3>
+        <span>Tell everything once. The system handles the matchmaking.</span>
+      </div>
+      <div class="card-pill">
+        <span>90 SECONDS • ONE FORM</span>
+      </div>
+    </div>
 
-      <label>Full Name</label>
-      <input name="fullName" required>
+    <!-- FORM POSTS DIRECTLY TO GOOGLE APPS SCRIPT -->
+    <form
+      id="creatorForm"
+      novalidate
+      method="POST"
+      action="https://script.google.com/macros/s/AKfycbzplgn5rbmsHya6-FC43v5OpPnt6ko9Me-FBnpKTC5-n0zQz3HGCbjGAEne8R6DMOvmug/exec"
+      target="hidden_iframe"
+    >
+      <div class="section-line"><span>Personal</span></div>
 
-      <label>Age</label>
-      <input name="age" type="number" required>
+      <label for="fullName">Full Name</label>
+      <input id="fullName" name="fullName" placeholder="Eg. Arjun K S" required>
 
-      <label>WhatsApp</label>
-      <input name="whatsapp" required>
+      <div class="grid">
+        <div>
+          <label for="age">Age</label>
+          <input id="age" name="age" type="number" placeholder="Eg. 20" required>
+        </div>
+        <div>
+          <label for="whatsapp">WhatsApp Number <span class="helper">Primary contact for shoots</span></label>
+          <input id="whatsapp" name="whatsapp" placeholder="Eg. 9XXXX XXXXX" required>
+        </div>
+      </div>
 
-      <label>Instagram</label>
-      <input name="instagram" required>
+      <label for="instagram">Instagram Username</label>
+      <input id="instagram" name="instagram" placeholder="@username" required>
 
-      <label>Editing Experience</label>
+      <div class="section-line"><span>College</span></div>
+
+      <label for="collegeStatus">College Status</label>
+      <select id="collegeStatus" name="collegeStatus" required>
+        <option value="" hidden selected>Select status</option>
+        <option value="student">College Student</option>
+        <option value="passed">Passed Out</option>
+      </select>
+
+      <div id="collegeBlock" class="hidden">
+        <label for="collegeName">College Name</label>
+        <input id="collegeName" name="collegeName" placeholder="Eg. PSG Tech, KPRIET, CIT">
+
+        <label for="department">Department</label>
+        <input id="department" name="department" placeholder="Eg. CSE, ECE, BBA">
+      </div>
+
+      <div class="section-line"><span>Location &amp; device</span></div>
+
+      <label for="area">Coimbatore Area</label>
+      <select id="area" name="area" required>
+        <option value="" hidden selected>Select your area</option>
+        <option>Gandhipuram / Town Hall / RS Puram</option>
+        <option>Peelamedu / Hope / SITRA</option>
+        <option>Saravanampatti / Kalapatti / Keeranatham</option>
+        <option>Singanallur / Ramanathapuram</option>
+        <option>Sulur</option>
+        <option>Ondipudur / Sulur</option>
+        <option>Vadavalli / P.N. Pudur</option>
+        <option>Kuniamuthur / Ukkadam</option>
+        <option>Neelambur / Chinniyampalayam</option>
+        <option>Thudiyalur / North Coimbatore</option>
+        <option>Outskirts</option>
+        <option>Not from Coimbatore</option>
+      </select>
+
+      <label for="iphoneModel">iPhone Model</label>
+      <select id="iphoneModel" name="iphoneModel" required>
+        <option value="" hidden selected>Select your exact iPhone</option>
+
+        <!-- iPhone 17 family -->
+        <option value="17">iPhone 17</option>
+        <option value="17-pro">iPhone 17 Pro</option>
+        <option value="17-pro-max">iPhone 17 Pro Max</option>
+        <option value="air">iPhone Air</option>
+
+        <!-- iPhone 16 family -->
+        <option value="16">iPhone 16</option>
+        <option value="16-plus">iPhone 16 Plus</option>
+        <option value="16-pro">iPhone 16 Pro</option>
+        <option value="16-pro-max">iPhone 16 Pro Max</option>
+        <option value="16e">iPhone 16e</option>
+
+        <!-- iPhone 15 family -->
+        <option value="15">iPhone 15</option>
+        <option value="15-plus">iPhone 15 Plus</option>
+        <option value="15-pro">iPhone 15 Pro</option>
+        <option value="15-pro-max">iPhone 15 Pro Max</option>
+
+        <!-- iPhone 14 family -->
+        <option value="14">iPhone 14</option>
+        <option value="14-plus">iPhone 14 Plus</option>
+        <option value="14-pro">iPhone 14 Pro</option>
+        <option value="14-pro-max">iPhone 14 Pro Max</option>
+
+        <!-- iPhone 13 family -->
+        <option value="13-mini">iPhone 13 mini</option>
+        <option value="13">iPhone 13</option>
+        <option value="13-pro">iPhone 13 Pro</option>
+        <option value="13-pro-max">iPhone 13 Pro Max</option>
+
+        <!-- SE -->
+        <option value="se-3">iPhone SE (3rd Gen)</option>
+      </select>
+
+      <div class="section-line"><span>Editing &amp; experience</span></div>
+
+      <label for="editingApp">Editing App</label>
+      <select id="editingApp" name="editingApp" required>
+        <option value="" hidden selected>Select your main app</option>
+        <option>CapCut / CapCut Pro</option>
+        <option>CapCut PC</option>
+        <option>DaVinci Resolve</option>
+        <option>VN</option>
+        <option>InShot</option>
+      </select>
+
+      <label for="editingExperience">Editing Experience</label>
       <select id="editingExperience" name="editingExperience" required>
-        <option value="" hidden>Select</option>
+        <option value="" hidden selected>How long have you edited?</option>
         <option>Below 6 months</option>
         <option>Above 8 months</option>
         <option>Above 1 year</option>
       </select>
 
-      <label>Paid Work</label>
+      <label for="paidWork">Have you done paid work?</label>
       <select id="paidWork" name="paidWork" required>
-        <option value="" hidden>Select</option>
+        <option value="" hidden selected>Select an option</option>
         <option>Yes, regularly</option>
         <option>Yes, few times</option>
         <option>Not yet</option>
       </select>
 
+      <label>Type of edits you have done</label>
+      <div class="check-grid">
+        <label class="check"><input name="editTypes" value="mua" type="checkbox"> Makeup / MUA</label>
+        <label class="check"><input name="editTypes" value="fashion" type="checkbox"> Boutique / Fashion</label>
+        <label class="check"><input name="editTypes" value="automotive" type="checkbox"> Automotive</label>
+        <label class="check"><input name="editTypes" value="business" type="checkbox"> Business reels</label>
+        <label class="check"><input name="editTypes" value="personal" type="checkbox"> Personal branding</label>
+        <label class="check"><input name="editTypes" value="college" type="checkbox"> College functions</label>
+        <label class="check"><input name="editTypes" value="promo" type="checkbox"> Promotional videos</label>
+      </div>
+
+      <div class="section-line"><span>Work mode</span></div>
+
+      <label for="businessClients">Have you worked with business clients?</label>
+      <select id="businessClients" name="businessClients" required>
+        <option value="" hidden selected>Select an option</option>
+        <option>Yes</option>
+        <option>No</option>
+      </select>
+
+      <label for="availability">Availability</label>
+      <select id="availability" name="availability" required>
+        <option value="" hidden selected>When can you shoot?</option>
+        <option>Weekends</option>
+        <option>Weekday evenings</option>
+        <option>Flexible</option>
+      </select>
+
+      <label for="creatorGoal">Creator Goal</label>
+      <select id="creatorGoal" name="creatorGoal" required>
+        <option value="" hidden selected>What do you want from SB?</option>
+        <option>Earn</option>
+        <option>Earn &amp; Learn</option>
+        <option>Earn, Learn &amp; Network</option>
+      </select>
+
       <button type="button" id="tierButton">CALCULATE MY TIER ⚡</button>
     </form>
   </div>
+
 </div>
 
-<!-- MODAL -->
 <div class="modal-overlay" id="modal">
   <div class="modal">
-    <h2>Your tier is ready</h2>
-    <div class="tier-badge" id="tierBadge">TIER</div>
-    <p id="tierText"></p>
+    <h2>Your creator tier is ready</h2>
+    <div class="tier-badge" id="tierBadge">TIER MATCHED</div>
+    <div class="modal-tier" id="tierText">You’ll be added to the right WhatsApp community based on your answers.</div>
+    <p>Tap below to join the Shoot Buddy community and start getting matched to real shoots.</p>
     <button onclick="window.open('https://chat.whatsapp.com/Huufo2mT8Fi5ZCrifn2s9K','_blank')">
-      JOIN WHATSAPP
+      JOIN WHATSAPP COMMUNITY
     </button>
   </div>
 </div>
 
+<footer>SHOOT BUDDY · CREATOR POWERHOUSE · 2025</footer>
+</div>
+
+<!-- hidden iframe for Sheets POST -->
+<iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+
 <script>
-const form = document.getElementById("creatorForm");
-const tierButton = document.getElementById("tierButton");
-const tierBadge = document.getElementById("tierBadge");
-const tierText = document.getElementById("tierText");
+const collegeStatus = document.getElementById("collegeStatus");
+const collegeBlock  = document.getElementById("collegeBlock");
+const form          = document.getElementById("creatorForm");
+const tierButton    = document.getElementById("tierButton");
+const tierBadge     = document.getElementById("tierBadge");
+const tierText      = document.getElementById("tierText");
 
-const SCRIPT_URL =
-"https://script.google.com/macros/s/AKfycbyf48jxGXOFbdTVUy2LimQQ74m_9KcSg1yGZGInoTzoWTtVaGs7Jxx2Hjpm-4Da0yxwuw/exec";
+collegeStatus.addEventListener("change", () => {
+  if (collegeStatus.value === "student") {
+    collegeBlock.classList.remove("hidden");
+  } else {
+    collegeBlock.classList.add("hidden");
+  }
+});
 
+// simple tier logic
 function detectTier(){
-  const exp = document.getElementById("editingExperience").value;
-  const paid = document.getElementById("paidWork").value;
-  if(exp==="Above 1 year" && paid==="Yes, regularly") return "Tier 1 · Premium";
-  if(paid!=="Not yet") return "Tier 2 · Growth";
-  return "Tier 3 · Learn & Earn";
+  const experience = document.getElementById("editingExperience").value;
+  const paidWork   = document.getElementById("paidWork").value;
+
+  if (experience === "Above 1 year" && paidWork === "Yes, regularly") {
+    return "Tier 1 · Premium creators";
+  }
+  if (experience !== "" && paidWork !== "Not yet") {
+    return "Tier 2 · Growth creators";
+  }
+  return "Tier 3 · Learn & earn creators";
 }
 
-tierButton.addEventListener("click", async ()=>{
-  if(!form.reportValidity()) return;
+tierButton.addEventListener("click", () => {
+  if (!form.reportValidity()) return;
 
-  const tier = detectTier();
-  tierBadge.textContent = tier.toUpperCase();
-  tierText.textContent = "You are placed in " + tier;
+  const tierLabel = detectTier();
+  tierBadge.textContent = tierLabel.toUpperCase();
+  tierText.textContent  = "You’ve been placed in " + tierLabel + ". Join the WhatsApp community to start getting matched.";
 
-  const fd = new FormData(form);
-  fd.append("tier", tier);
+  // submit form to Google Sheets (hidden iframe)
+  form.submit();
 
-  await fetch(SCRIPT_URL,{method:"POST",body:new URLSearchParams(fd)});
-  document.getElementById("modal").classList.add("active");
+  // show modal immediately
+  openModal();
 });
+
+function openModal(){
+  document.getElementById("modal").classList.add("active");
+}
 </script>
 
 </body>
