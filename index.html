@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Shoot Buddy • Creator Powerhouse</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* ================= ROOT ================= */
+:root{
+  --bg:#020309;
+  --bg-elevated:#050712;
+  --card:#070815;
+  --border:#191b29;
+  --border-soft:#252741;
+  --text:#f9fbff;
+  --muted:#9ca3c7;
+  --muted-soft:#6b7280;
+  --neon:#b6ff00;
+  --neon-soft:#d8ff66;
+  --accent:#66d4ff;
+  --danger:#ff66d4;
+  --shadow-soft:0 24px 80px rgba(0,0,0,.65);
+  --radius-xl:28px;
+  --radius-lg:22px;
+  --radius-md:18px;
+  --glass:rgba(10,12,30,.88);
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+
+body{
+  background:
+    radial-gradient(circle at -10% 0%,rgba(182,255,0,.18),transparent 55%),
+    radial-gradient(circle at 110% 10%,rgba(102,212,255,.18),transparent 55%),
+    radial-gradient(circle at 0% 100%,rgba(255,102,212,.14),transparent 55%),
+    var(--bg);
+  color:var(--text);
+  font-family:Manrope,sans-serif;
+  overflow-x:hidden;
+}
+
+/* ================= HEADER ================= */
+header{
+  position:sticky;top:0;z-index:20;
+  backdrop-filter:blur(18px);
+  background:rgba(2,3,9,.9);
+  border-bottom:1px solid rgba(148,163,255,.18);
+}
+.nav{
+  max-width:1200px;margin:auto;
+  padding:10px 14px;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.logo{
+  width:40px;height:40px;border-radius:14px;
+  background:#b6ff00;color:#000;
+  font-weight:800;display:flex;
+  align-items:center;justify-content:center;
+}
+
+/* ================= HERO ================= */
+.hero{
+  max-width:700px;margin:auto;
+  padding:40px 18px;text-align:center;
+}
+.hero h1{
+  font-size:2rem;font-weight:800;
+}
+.hero span{
+  background:linear-gradient(120deg,#b6ff00,#66d4ff);
+  -webkit-background-clip:text;
+  color:transparent;
+}
+
+/* ================= CONTAINER ================= */
+.container{max-width:760px;margin:auto;padding:16px}
+
+/* ================= FORM ================= */
+.card{
+  background:var(--glass);
+  border-radius:28px;
+  border:1px solid rgba(148,163,255,.22);
+  padding:24px;
+  box-shadow:var(--shadow-soft);
+}
+label{display:block;margin-top:12px;font-size:.8rem}
+input,select{
+  width:100%;padding:12px;
+  border-radius:18px;
+  border:1px solid #1f294f;
+  background:#0a0c20;
+  color:#fff;
+}
+
+button{
+  width:100%;margin-top:20px;
+  padding:14px;border-radius:999px;
+  border:none;
+  background:#b6ff00;
+  font-weight:800;
+  cursor:pointer;
+}
+
+/* ================= MODAL ================= */
+.modal-overlay{
+  position:fixed;inset:0;
+  background:rgba(0,0,0,.8);
+  display:none;
+  align-items:center;justify-content:center;
+}
+.modal-overlay.active{display:flex}
+.modal{
+  background:#070815;
+  padding:24px;border-radius:24px;
+  text-align:center;
+}
+.tier-badge{
+  margin:12px auto;
+  padding:10px 20px;
+  border-radius:999px;
+  border:2px solid #b6ff00;
+  color:#b6ff00;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="nav">
+    <div class="logo">SB</div>
+    <strong>Shoot Buddy</strong>
+  </div>
+</header>
+
+<section class="hero">
+  <h1>Turn your iPhone into a <span>money-making machine</span></h1>
+  <p>Fill once. Get matched. Get paid.</p>
+</section>
+
+<div class="container">
+  <div class="card">
+    <form id="creatorForm" novalidate>
+
+      <label>Full Name</label>
+      <input name="fullName" required>
+
+      <label>Age</label>
+      <input name="age" type="number" required>
+
+      <label>WhatsApp</label>
+      <input name="whatsapp" required>
+
+      <label>Instagram</label>
+      <input name="instagram" required>
+
+      <label>Editing Experience</label>
+      <select id="editingExperience" name="editingExperience" required>
+        <option value="" hidden>Select</option>
+        <option>Below 6 months</option>
+        <option>Above 8 months</option>
+        <option>Above 1 year</option>
+      </select>
+
+      <label>Paid Work</label>
+      <select id="paidWork" name="paidWork" required>
+        <option value="" hidden>Select</option>
+        <option>Yes, regularly</option>
+        <option>Yes, few times</option>
+        <option>Not yet</option>
+      </select>
+
+      <button type="button" id="tierButton">CALCULATE MY TIER ⚡</button>
+    </form>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <h2>Your tier is ready</h2>
+    <div class="tier-badge" id="tierBadge">TIER</div>
+    <p id="tierText"></p>
+    <button onclick="window.open('https://chat.whatsapp.com/Huufo2mT8Fi5ZCrifn2s9K','_blank')">
+      JOIN WHATSAPP
+    </button>
+  </div>
+</div>
+
+<script>
+const form = document.getElementById("creatorForm");
+const tierButton = document.getElementById("tierButton");
+const tierBadge = document.getElementById("tierBadge");
+const tierText = document.getElementById("tierText");
+
+const SCRIPT_URL =
+"https://script.google.com/macros/s/AKfycbyf48jxGXOFbdTVUy2LimQQ74m_9KcSg1yGZGInoTzoWTtVaGs7Jxx2Hjpm-4Da0yxwuw/exec";
+
+function detectTier(){
+  const exp = document.getElementById("editingExperience").value;
+  const paid = document.getElementById("paidWork").value;
+  if(exp==="Above 1 year" && paid==="Yes, regularly") return "Tier 1 · Premium";
+  if(paid!=="Not yet") return "Tier 2 · Growth";
+  return "Tier 3 · Learn & Earn";
+}
+
+tierButton.addEventListener("click", async ()=>{
+  if(!form.reportValidity()) return;
+
+  const tier = detectTier();
+  tierBadge.textContent = tier.toUpperCase();
+  tierText.textContent = "You are placed in " + tier;
+
+  const fd = new FormData(form);
+  fd.append("tier", tier);
+
+  await fetch(SCRIPT_URL,{method:"POST",body:new URLSearchParams(fd)});
+  document.getElementById("modal").classList.add("active");
+});
+</script>
+
+</body>
+</html>
