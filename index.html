@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Shoot Buddy • Creator Powerhouse</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<meta charset="UTF-8" />
+<title>Shoot Buddy • Creator Engine</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
 <style>
 :root{
@@ -47,19 +47,24 @@ body{
   overflow-x:hidden;
 }
 
-body::before{
-  content:"";
-  position:fixed;
-  inset:-40px;
-  background-image:
-    radial-gradient(circle at 15% 20%,rgba(255,255,255,.09),transparent 55%),
-    linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);
-  background-size:480px 480px,80px 80px,80px 80px;
-  mix-blend-mode:soft-light;
-  opacity:.24;
-  pointer-events:none;
-  z-index:0;
+/* orbs */
+.orb {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.4;
+  pointer-events: none;
+  z-index: 0;
+  animation: float 20s infinite ease-in-out;
+}
+.orb-1 { width: 400px;height: 400px;background: radial-gradient(circle, rgba(182,255,0,0.6), transparent);top: 10%;left: -10%; }
+.orb-2 { width: 350px;height: 350px;background: radial-gradient(circle, rgba(102,212,255,0.5), transparent);top: 50%;right: -8%; }
+.orb-3 { width: 300px;height: 300px;background: radial-gradient(circle, rgba(255,102,212,0.4), transparent);bottom: 10%;left: 20%; }
+@keyframes float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(30px, -30px) scale(1.1); }
+  50% { transform: translate(-20px, 20px) scale(0.9); }
+  75% { transform: translate(40px, 10px) scale(1.05); }
 }
 
 .page-shell{position:relative;z-index:1}
@@ -73,7 +78,6 @@ header{
   background:linear-gradient(to bottom,rgba(2,3,9,.96),rgba(2,3,9,.9));
   border-bottom:1px solid rgba(148,163,255,.18);
 }
-
 .nav{
   max-width:1200px;
   margin:auto;
@@ -82,15 +86,12 @@ header{
   justify-content:space-between;
   align-items:center;
 }
-
 .nav-left{display:flex;gap:10px;align-items:center}
-
 .logo-wrap{
   padding:2px;
   border-radius:16px;
   background:conic-gradient(from 160deg,#b6ff00,#66d4ff,#ff66d4,#b6ff00);
 }
-
 .logo{
   width:40px;height:40px;
   border-radius:14px;
@@ -103,7 +104,6 @@ header{
   box-shadow:0 10px 30px rgba(182,255,0,.45);
   font-size:.85rem;
 }
-
 .brand-text{display:flex;flex-direction:column;gap:1px}
 .brand-text strong{font-size:.7rem;letter-spacing:.22em;color:var(--muted)}
 .brand-text span{font-size:.65rem;color:var(--muted-soft)}
@@ -122,7 +122,6 @@ header{
   align-items:center;
   gap:6px;
 }
-
 .nav-dot{
   width:6px;height:6px;
   border-radius:999px;
@@ -135,20 +134,8 @@ header{
   max-width:700px;
   margin:0 auto;
   padding:40px 18px 32px;
-  position:relative;
+  text-align:center;
 }
-.hero-inner{text-align:center}
-.hero-orbit{
-  position:absolute;
-  inset:30px 0 auto;
-  max-width:520px;
-  margin:0 auto;
-  opacity:.25;
-  filter:blur(40px);
-  background:radial-gradient(circle at 50% 0%,rgba(182,255,0,1) 0,transparent 55%);
-  z-index:-1;
-}
-
 .hero-badge{
   display:inline-flex;
   align-items:center;
@@ -163,7 +150,6 @@ header{
   text-transform:uppercase;
   color:var(--neon-soft);
 }
-
 .hero-eyebrow{
   margin-top:14px;
   font-size:.7rem;
@@ -171,27 +157,19 @@ header{
   letter-spacing:.16em;
   color:var(--muted-soft);
 }
-
 .hero h1{
-  font-size:1.8rem;
+  font-size:2.1rem;
   line-height:1.05;
-  margin:14px 0 12px;
+  margin:18px 0 12px;
   font-weight:800;
   letter-spacing:-.05em;
 }
-
-@media(min-width:480px){
-  .hero h1{font-size:2.2rem;}
-}
-
 .hero h1 span{
   background:linear-gradient(120deg,#b6ff00,#66d4ff);
   -webkit-background-clip:text;
   background-clip:text;
   color:transparent;
-  text-shadow:0 0 32px rgba(102,212,255,.35);
 }
-
 .hero p{
   max-width:520px;
   margin:0 auto;
@@ -199,13 +177,11 @@ header{
   font-size:.9rem;
   line-height:1.6;
 }
-
 .hero-sub{
   margin-top:6px;
   font-size:.75rem;
   color:var(--muted-soft);
 }
-
 .tags{
   margin-top:20px;
   display:flex;
@@ -224,70 +200,113 @@ header{
 }
 .tag span{color:var(--neon-soft)}
 
-/* container */
+/* layout */
 .container{
-  max-width:760px;
-  margin:0 auto;
-  padding:0 16px 32px;
+  max-width:960px;
+  margin:0 auto 40px;
+  padding:0 16px;
+}
+.main-grid{
+  display:grid;
+  grid-template-columns:1.1fr 0.9fr;
+  gap:18px;
+}
+@media(max-width:800px){
+  .main-grid{grid-template-columns:1fr;}
 }
 
-/* tiers */
-.tiers{
+/* tier summary */
+.tier-card{
+  position:relative;
+  overflow:hidden;
+  background:var(--glass);
+  border-radius:var(--radius-xl);
+  border:1px solid rgba(148,163,255,.22);
+  padding:22px 18px 20px;
+  box-shadow:var(--shadow-soft);
+}
+.tier-card::before{
+  content:"";
+  position:absolute;
+  inset:-40px;
+  pointer-events:none;
+  opacity:.4;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(182,255,0,.18), transparent 55%),
+    radial-gradient(circle at 120% 100%, rgba(102,212,255,.12), transparent 55%);
+  z-index:0;
+}
+.tier-card > *{
+  position:relative;
+  z-index:1;
+}
+.tier-card h2{
+  font-size:.8rem;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--muted-soft);
+  margin-bottom:10px;
+}
+.tier-list{
   display:grid;
   grid-template-columns:1fr;
-  gap:16px;
-  margin:6px 0 30px;
+  gap:12px;
 }
-@media(min-width:680px){
-  .tiers{grid-template-columns:repeat(3,minmax(0,1fr));}
-}
-
 .tier{
   border-radius:var(--radius-lg);
-  padding:20px 18px 16px;
+  padding:14px 12px;
   background:linear-gradient(135deg,rgba(10,12,30,.92),rgba(5,7,18,.98));
   border:1px solid rgba(148,163,255,.18);
-  box-shadow:0 14px 40px rgba(0,0,0,.75);
 }
 .tier-label{
   font-size:.65rem;
   text-transform:uppercase;
   letter-spacing:.2em;
   color:var(--muted-soft);
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:3px 8px;
+  border-radius:999px;
+  background:rgba(15,23,42,.9);
 }
-.tier h3{margin:6px 0 4px;font-size:1rem}
-.tier-1 h3{color:#d4ff5a}
-.tier-2 h3{color:#8ae1ff}
-.tier-3 h3{color:#ffb3e8}
+.tier-label-1{
+  border:1px solid rgba(182,255,0,.7);
+}
+.tier-label-2{
+  border:1px solid rgba(102,212,255,.6);
+}
+.tier-label-3{
+  border:1px solid rgba(255,102,212,.55);
+}
+.tier h3{margin:6px 0 4px;font-size:.95rem}
 .tier p{font-size:.78rem;color:var(--muted)}
-.tier-meta{
-  margin-top:10px;
-  font-size:.72rem;
-  color:var(--muted-soft);
+.tier-1{
+  border-color: rgba(182,255,0,.7);
+  box-shadow: 0 0 25px rgba(182,255,0,.35);
+}
+.tier-2{
+  border-color: rgba(102,212,255,.5);
+}
+.tier-3{
+  border-color: rgba(255,102,212,.4);
 }
 
-/* main card */
+/* card (form) */
 .card{
   background:var(--glass);
   border-radius:var(--radius-xl);
   border:1px solid rgba(148,163,255,.22);
   padding:22px 18px 24px;
-  margin:0 auto 28px;
   box-shadow:var(--shadow-soft);
-  backdrop-filter:blur(22px) saturate(130%);
 }
-@media(min-width:600px){
-  .card{padding:30px 26px 30px;}
-}
-
 .card-header{
   display:flex;
   justify-content:space-between;
   gap:12px;
   align-items:flex-start;
-  margin-bottom:12px;
+  margin-bottom:10px;
 }
-.card-title{display:flex;flex-direction:column;gap:4px}
 .card-title h3{font-size:1rem}
 .card-title span{font-size:.75rem;color:var(--muted-soft)}
 .card-pill{
@@ -298,26 +317,64 @@ header{
   letter-spacing:.16em;
   text-transform:uppercase;
   color:var(--neon-soft);
-  display:flex;
-  align-items:center;
 }
 
-/* section line */
+/* section line + chip */
 .section-line{
-  margin-top:22px;
+  margin-top:18px;
   margin-bottom:6px;
-  padding-top:14px;
+  padding-top:10px;
   border-top:1px solid rgba(148,163,255,.22);
   font-size:.68rem;
-  letter-spacing:.18em;
   text-transform:uppercase;
   color:var(--muted-soft);
+  display:flex;
+  align-items:center;
+  gap:8px;
+  letter-spacing:.18em;
+}
+.section-chip{
+  padding:3px 8px;
+  border-radius:999px;
+  border:1px solid rgba(148,163,255,.35);
+  background:rgba(15,23,42,.9);
+  letter-spacing:.14em;
+  font-size:.58rem;
+  color:var(--neon-soft);
 }
 
 /* form */
+.field-shell{
+  position:relative;
+  margin-top:10px;
+}
+.field-shell::before{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  border-radius:var(--radius-md);
+  background:linear-gradient(135deg,rgba(182,255,0,0),rgba(102,212,255,0));
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .2s ease, background .2s ease;
+}
+.field-shell.focused::before{
+  opacity:1;
+  background:linear-gradient(135deg,rgba(182,255,0,.45),rgba(102,212,255,.35));
+}
+.field-shell label{
+  position:relative;
+  z-index:1;
+}
+.field-shell input,
+.field-shell select,
+.field-shell textarea{
+  position:relative;
+  z-index:1;
+}
+
 label{
   display:block;
-  margin-top:10px;
   margin-bottom:4px;
   font-size:.78rem;
   font-weight:600;
@@ -329,8 +386,7 @@ label span.helper{
   margin-left:4px;
   font-size:.7rem;
 }
-
-input,select{
+input,select,textarea{
   width:100%;
   padding:11px 13px;
   border-radius:var(--radius-md);
@@ -339,23 +395,17 @@ input,select{
   color:#f9fbff;
   font-size:.86rem;
   outline:none;
-  transition:border .18s ease,box-shadow .18s ease,background .18s ease,transform .12s ease;
   box-shadow:inset 0 0 0 1px rgba(15,23,42,.65);
 }
-
-input::placeholder{color:var(--muted-soft)}
-
-input:focus,select:focus{
+input::placeholder,textarea::placeholder{color:var(--muted-soft);}
+input:focus,select:focus,textarea:focus{
   border-color:var(--neon-soft);
   box-shadow:0 0 0 1px rgba(182,255,0,.4),0 0 24px rgba(182,255,0,.22);
   background:rgba(12,16,40,.98);
-  transform:translateY(-1px);
 }
+textarea{min-height:80px;resize:vertical;}
 
-/* select placeholder behaviour */
-select:required:invalid{
-  color:var(--muted-soft);
-}
+select:required:invalid{color:var(--muted-soft);}
 select option{color:#f9fbff;}
 select option[hidden]{color:#f9fbff;}
 
@@ -369,7 +419,7 @@ select option[hidden]{color:#f9fbff;}
   .grid{grid-template-columns:1fr 1fr;}
 }
 
-/* check grid */
+/* checkbox pills */
 .check-grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
@@ -387,14 +437,13 @@ select option[hidden]{color:#f9fbff;}
              rgba(10,12,32,.96);
   font-size:.75rem;
   color:var(--muted);
-  cursor:pointer;
 }
-.check input{width:auto;accent-color:var(--neon);cursor:pointer}
+.check input{width:auto;accent-color:var(--neon);}
 
 /* button */
 button{
   width:100%;
-  margin-top:22px;
+  margin-top:20px;
   padding:13px 14px;
   border-radius:999px;
   border:none;
@@ -406,71 +455,91 @@ button{
   text-transform:uppercase;
   cursor:pointer;
   box-shadow:0 14px 40px rgba(182,255,0,.58);
+  position:relative;
+  overflow:hidden;
+  transition:transform .15s ease, box-shadow .15s ease;
+}
+button::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(120deg,rgba(255,255,255,.35),transparent);
+  mix-blend-mode:screen;
+  transform:translateX(-120%);
+  transition:transform .35s ease-out;
+}
+button:hover::after{
+  transform:translateX(120%);
+}
+button:hover{
+  transform:translateY(-1px);
+  box-shadow:0 18px 50px rgba(182,255,0,.68);
+}
+button:disabled{
+  opacity:0.6;
+  cursor:not-allowed;
 }
 
-/* college toggle */
-#collegeBlock.hidden{display:none}
-
-/* modal (kept, but not used until Formspree works) */
+/* modal */
 .modal-overlay{
   position:fixed;
   inset:0;
-  background:radial-gradient(circle at 20% 0%,rgba(182,255,0,.45),transparent 55%),
-             rgba(2,3,9,.96);
+  background:rgba(2,3,9,.9);
   display:flex;
   align-items:center;
   justify-content:center;
   opacity:0;
   pointer-events:none;
-  transition:opacity .22s ease;
+  transition:opacity .25s ease;
   z-index:40;
 }
 .modal-overlay.active{
   opacity:1;
   pointer-events:auto;
 }
-
 .modal{
-  background:radial-gradient(circle at 0 0,rgba(182,255,0,.12),transparent 55%),
+  background:radial-gradient(circle at 50% 0,rgba(182,255,0,.18),transparent 65%),
+             radial-gradient(circle at 0 100%,rgba(102,212,255,.12),transparent 60%),
              rgba(7,9,25,.98);
-  border-radius:24px;
-  border:1px solid rgba(148,163,255,.28);
-  padding:24px 18px 20px;
+  border-radius:26px;
+  border:1px solid rgba(148,163,255,.35);
+  padding:26px 22px 24px;
+  max-width:420px;
+  width:90%;
   text-align:center;
-  max-width:360px;
-  width:92%;
-  box-shadow:var(--shadow-soft);
-  backdrop-filter:blur(22px);
+  box-shadow:0 30px 90px rgba(0,0,0,.9);
 }
-.modal h2{margin-bottom:4px;font-size:1.05rem}
-.modal p{margin-top:6px;font-size:.8rem;color:var(--muted)}
-.modal-tier{
-  margin-top:10px;
-  margin-bottom:4px;
-  font-size:.75rem;
-  color:var(--neon-soft);
+.modal h2{font-size:1.3rem;margin-bottom:8px;}
+.modal p{font-size:.85rem;color:var(--muted);margin-bottom:10px;}
+.modal-actions{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
 }
-.tier-badge{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:6px;
-  margin:12px 0 4px;
-  padding:9px 16px;
+.modal a{
+  text-decoration:none;
+}
+.modal-btn{
+  display:block;
+  width:100%;
+  padding:11px 14px;
   border-radius:999px;
-  font-weight:800;
-  border:2px solid var(--neon-soft);
-  color:var(--neon-soft);
-  font-size:.72rem;
-  letter-spacing:.18em;
+  font-size:.78rem;
+  font-weight:700;
+  letter-spacing:.12em;
   text-transform:uppercase;
-  background:rgba(8,10,28,.96);
+  border:none;
+  cursor:pointer;
+}
+.modal-btn.primary{
+  background:linear-gradient(135deg,#25D366,#128C7E);
+  color:#fff;
 }
 
 /* footer */
 footer{
   text-align:center;
-  padding:26px 16px 32px;
+  padding:20px 16px 32px;
   color:var(--muted-soft);
   font-size:.7rem;
 }
@@ -478,261 +547,422 @@ footer{
 </head>
 
 <body>
-<div class="page-shell">
-<header>
-  <div class="nav">
-    <div class="nav-left">
-      <div class="logo-wrap">
-        <div class="logo">SB</div>
-      </div>
-      <div class="brand-text">
-        <strong>SHOOT BUDDY · CREATOR ENGINE</strong>
-        <span>High-signal paid shoots for iPhone editors</span>
-      </div>
-    </div>
-    <div class="nav-pill">
-      <div class="nav-dot"></div>
-      <span>COIMBATORE · IPHONE ONLY</span>
-    </div>
-  </div>
-</header>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
 
-<section class="hero">
-  <div class="hero-orbit"></div>
-  <div class="hero-inner">
+<div class="page-shell">
+  <header>
+    <div class="nav">
+      <div class="nav-left">
+        <div class="logo-wrap">
+          <div class="logo">SB</div>
+        </div>
+        <div class="brand-text">
+          <strong>SHOOT BUDDY · CREATOR ENGINE</strong>
+          <span>High-signal paid shoots for iPhone editors</span>
+        </div>
+      </div>
+      <div class="nav-pill">
+        <div class="nav-dot"></div>
+        <span>COIMBATORE · IPHONE ONLY</span>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
     <div class="hero-badge">
       <span>⚡</span>
       <span>TURN YOUR IPHONE INTO CASHFLOW</span>
     </div>
     <div class="hero-eyebrow">CREATOR TIER MATCHING • REAL BRANDS • REAL MONEY</div>
     <h1>Turn your iPhone into a <span>money‑making machine</span></h1>
-    <p>Fill this once. You’ll get matched to the right creator tier and pushed into a curated WhatsApp community for your exact skill level.</p>
-    <p class="hero-sub">No random broadcast groups. Only filtered opportunities that match your gear, skills, and time.</p>
+    <p>Answer a few smart questions once. Shoot Buddy scores your skills, device and experience, then routes you to shoots that actually match you.</p>
+    <p class="hero-sub">No courses. No follower checks. Only filtered opportunities based on how good you are and how serious you are.</p>
     <div class="tags">
       <div class="tag"><span>Real shoots</span> · Paid work</div>
       <div class="tag">Tier 1 · Tier 2 · Tier 3</div>
-      <div class="tag">Students from Coimbatore</div>
+      <div class="tag">Coimbatore creators</div>
       <div class="tag">Skill‑based matching</div>
     </div>
-  </div>
-</section>
+  </section>
 
-<div class="container">
-
-  <div class="tiers">
-    <div class="tier tier-1">
-      <div class="tier-label">Tier 1</div>
-      <h3>Premium creators</h3>
-      <p>Editors who can walk into brand shoots today and deliver scroll‑stopping content without hand‑holding.</p>
-      <div class="tier-meta">
-        Brand‑ready, high‑priority shoots with the strongest pay and fastest growth.
-      </div>
-    </div>
-    <div class="tier tier-2">
-      <div class="tier-label">Tier 2</div>
-      <h3>Growth creators</h3>
-      <p>Close to premium. You understand cuts, pacing, hooks and can follow creative direction for most local brands.</p>
-      <div class="tier-meta">
-        Guided growth with strong earnings and feedback to push you into Tier 1.
-      </div>
-    </div>
-    <div class="tier tier-3">
-      <div class="tier-label">Tier 3</div>
-      <h3>Learn &amp; earn creators</h3>
-      <p>Just getting started. Perfect for real briefs, campus events and friendly practice shoots.</p>
-      <div class="tier-meta">
-        Learn, earn and stack a portfolio as you move towards higher‑tier brand work.
-      </div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-header">
-      <div class="card-title">
-        <h3>Creator details</h3>
-        <span>Tell everything once. The system handles the matchmaking.</span>
-      </div>
-      <div class="card-pill">
-        <span>90 SECONDS • ONE FORM</span>
-      </div>
-    </div>
-
-    <!-- SIMPLE FORMSPREE FORM FOR TESTING -->
-    <form
-      id="creatorForm"
-      method="POST"
-      action="https://formspree.io/f/mnjaqjjn"
-    >
-      <div class="section-line"><span>Personal</span></div>
-
-      <label for="fullName">Full Name</label>
-      <input id="fullName" name="fullName" placeholder="Eg. Arjun K S" required>
-
-      <div class="grid">
-        <div>
-          <label for="age">Age</label>
-          <input id="age" name="age" type="number" placeholder="Eg. 20" required>
-        </div>
-        <div>
-          <label for="whatsapp">WhatsApp Number <span class="helper">Primary contact for shoots</span></label>
-          <input id="whatsapp" name="whatsapp" placeholder="Eg. 9XXXX XXXXX" required>
+  <div class="container">
+    <div class="main-grid">
+      <!-- Tier explanation -->
+      <div class="tier-card">
+        <h2>Tier system · pick your lane</h2>
+        <div class="tier-list">
+          <div class="tier tier-1">
+            <div class="tier-label tier-label-1">⭐ Tier 1 · Premium</div>
+            <h3>Brand‑ready creators</h3>
+            <p>You edit on tools like Alight Motion, CapCut, DaVinci, Premiere Pro or After Effects, have 1+ year of experience, and can handle real business shoots with confidence.</p>
+            <p style="font-size:.72rem;color:var(--muted-soft);margin-top:4px;">
+              Best for: High‑budget brand work, fast‑moving campaigns, clients who expect zero hand‑holding.
+            </p>
+          </div>
+          <div class="tier tier-2">
+            <div class="tier-label tier-label-2">🚀 Tier 2 · Growth</div>
+            <h3>Level‑up creators</h3>
+            <p>You understand cuts, pacing and hooks, have around 8+ months of editing, and can follow a clear brief for most local brands.</p>
+            <p style="font-size:.72rem;color:var(--muted-soft);margin-top:4px;">
+              Best for: Local brands, guided shoots, consistent feedback to push you into Tier 1.
+            </p>
+          </div>
+          <div class="tier tier-3">
+            <div class="tier-label tier-label-3">🌱 Tier 3 · Learn &amp; earn</div>
+            <h3>Serious beginners</h3>
+            <p>You’re below 6 months of editing, hungry to improve, and ready to start with college events and practice shoots.</p>
+            <p style="font-size:.72rem;color:var(--muted-soft);margin-top:4px;">
+              Best for: Campus work, friendly practice briefs and first paid content.
+            </p>
+          </div>
         </div>
       </div>
 
-      <label for="instagram">Instagram Username</label>
-      <input id="instagram" name="instagram" placeholder="@username" required>
+      <!-- Form -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">
+            <h3>Creator intake form</h3>
+            <span>90 seconds now. Long‑term paid shoots later.</span>
+          </div>
+          <div class="card-pill">
+            <span>ONE FORM • NO SPAM</span>
+          </div>
+        </div>
 
-      <div class="section-line"><span>College</span></div>
+        <form id="creatorForm" action="https://formspree.io/f/mnjaqjjn" method="POST">
+          <!-- Personal -->
+          <div class="section-line">
+            <span class="section-chip">Step 1</span>
+            <span>Personal</span>
+          </div>
 
-      <label for="collegeStatus">College Status</label>
-      <select id="collegeStatus" name="collegeStatus" required>
-        <option value="" hidden selected>Select status</option>
-        <option value="student">College Student</option>
-        <option value="passed">Passed Out</option>
-      </select>
+          <div class="field-shell">
+            <label for="fullName">Full Name</label>
+            <input id="fullName" name="fullName" placeholder="Eg. Arjun K S" required />
+          </div>
 
-      <div id="collegeBlock" class="hidden">
-        <label for="collegeName">College Name</label>
-        <input id="collegeName" name="collegeName" placeholder="Eg. PSG Tech, KPRIET, CIT">
+          <div class="grid">
+            <div class="field-shell">
+              <label for="age">Age</label>
+              <input id="age" name="age" type="number" placeholder="Eg. 20" required />
+            </div>
+            <div class="field-shell">
+              <label for="whatsapp">WhatsApp Number <span class="helper">Primary contact for shoots</span></label>
+              <input id="whatsapp" name="whatsapp" placeholder="Eg. 9XXXX XXXXX" required />
+            </div>
+          </div>
 
-        <label for="department">Department</label>
-        <input id="department" name="department" placeholder="Eg. CSE, ECE, BBA">
+          <div class="field-shell">
+            <label for="instagram">Instagram Username</label>
+            <input id="instagram" name="instagram" placeholder="@username" required />
+          </div>
+
+          <!-- College -->
+          <div class="section-line">
+            <span class="section-chip">Step 2</span>
+            <span>College status</span>
+          </div>
+
+          <div class="field-shell">
+            <label for="collegeStatus">College Status</label>
+            <select id="collegeStatus" name="collegeStatus" required>
+              <option value="" hidden selected>Select status</option>
+              <option value="College Student">College Student</option>
+              <option value="Passed Out">Passed Out</option>
+            </select>
+          </div>
+
+          <div class="field-shell">
+            <label for="collegeName">College Name</label>
+            <input id="collegeName" name="collegeName" placeholder="Eg. PSG Tech, KPRIET, CIT" />
+          </div>
+
+          <div class="field-shell">
+            <label for="department">Department</label>
+            <input id="department" name="department" placeholder="Eg. CSE, ECE, BBA" />
+          </div>
+
+          <!-- Location & device -->
+          <div class="section-line">
+            <span class="section-chip">Step 3</span>
+            <span>Location &amp; device</span>
+          </div>
+
+          <div class="field-shell">
+            <label for="area">Coimbatore Area</label>
+            <select id="area" name="area" required>
+              <option value="" hidden selected>Select your area</option>
+              <option>Gandhipuram / Town Hall / RS Puram</option>
+              <option>Peelamedu / Hope / SITRA</option>
+              <option>Saravanampatti / Kalapatti / Keeranatham</option>
+              <option>Singanallur / Ramanathapuram</option>
+              <option>Sulur</option>
+              <option>Ondipudur / Sulur</option>
+              <option>Vadavalli / P.N. Pudur</option>
+              <option>Kuniamuthur / Ukkadam</option>
+              <option>Neelambur / Chinniyampalayam</option>
+              <option>Thudiyalur / North Coimbatore</option>
+              <option>Outskirts</option>
+              <option>Not from Coimbatore</option>
+            </select>
+          </div>
+
+          <div class="field-shell">
+            <label for="iphoneModel">Exact iPhone model</label>
+            <select id="iphoneModel" name="iphoneModel" required>
+              <option value="" hidden selected>Select your iPhone</option>
+              <option>iPhone 13</option>
+              <option>iPhone 13 mini</option>
+              <option>iPhone 13 Pro</option>
+              <option>iPhone 13 Pro Max</option>
+
+              <option>iPhone 14</option>
+              <option>iPhone 14 Plus</option>
+              <option>iPhone 14 Pro</option>
+              <option>iPhone 14 Pro Max</option>
+
+              <option>iPhone 15</option>
+              <option>iPhone 15 Plus</option>
+              <option>iPhone 15 Pro</option>
+              <option>iPhone 15 Pro Max</option>
+
+              <option>iPhone 16</option>
+              <option>iPhone 16 Plus</option>
+              <option>iPhone 16 Pro</option>
+              <option>iPhone 16 Pro Max</option>
+
+              <option>iPhone 17</option>
+              <option>iPhone 17 Pro</option>
+              <option>iPhone 17 Pro Max</option>
+              <option>iPhone Air</option>
+            </select>
+          </div>
+
+          <!-- Tools & experience -->
+          <div class="section-line">
+            <span class="section-chip">Step 4</span>
+            <span>Tools &amp; experience</span>
+          </div>
+
+          <div class="field-shell">
+            <label for="mainTool">Main editing app</label>
+            <select id="mainTool" name="mainTool" required>
+              <option value="" hidden selected>Select your main editor</option>
+              <option>CapCut</option>
+              <option>DaVinci Resolve</option>
+              <option>Premiere Pro</option>
+              <option>Alight Motion</option>
+              <option>After Effects</option>
+              <option>VN</option>
+              <option>InShot</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div class="field-shell">
+            <label for="expLevel">Editing experience</label>
+            <select id="expLevel" name="expLevel" required>
+              <option value="" hidden selected>Select experience</option>
+              <option>Below 6 months</option>
+              <option>Above 8 months</option>
+              <option>Above 1 year</option>
+            </select>
+          </div>
+
+          <div class="field-shell">
+            <label for="paidWork">Paid work experience</label>
+            <select id="paidWork" name="paidWork" required>
+              <option value="" hidden selected>Select one</option>
+              <option>Yes, regularly</option>
+              <option>Yes, few times</option>
+              <option>Not yet</option>
+            </select>
+          </div>
+
+          <label>Types of work done</label>
+          <div class="check-grid">
+            <label class="check"><input type="checkbox" name="workType" value="Makeup / MUA" /> Makeup / MUA</label>
+            <label class="check"><input type="checkbox" name="workType" value="Boutique / Fashion" /> Boutique / Fashion</label>
+            <label class="check"><input type="checkbox" name="workType" value="Automotive" /> Automotive</label>
+            <label class="check"><input type="checkbox" name="workType" value="Business reels" /> Business reels</label>
+            <label class="check"><input type="checkbox" name="workType" value="Personal branding" /> Personal branding</label>
+            <label class="check"><input type="checkbox" name="workType" value="College functions" /> College functions</label>
+            <label class="check"><input type="checkbox" name="workType" value="Promotional videos" /> Promotional videos</label>
+            <label class="check"><input type="checkbox" name="workType" value="Random edits" /> Random edits / experimentation</label>
+          </div>
+
+          <div class="field-shell">
+            <label for="businessExposure">Worked with business clients?</label>
+            <select id="businessExposure" name="businessExposure" required>
+              <option value="" hidden selected>Select one</option>
+              <option>Yes</option>
+              <option>No</option>
+            </select>
+          </div>
+
+          <!-- Availability & goal -->
+          <div class="section-line">
+            <span class="section-chip">Step 5</span>
+            <span>Availability &amp; intent</span>
+          </div>
+
+          <div class="field-shell">
+            <label for="availability">When can you shoot?</label>
+            <select id="availability" name="availability" required>
+              <option value="" hidden selected>Select availability</option>
+              <option>Weekends</option>
+              <option>Weekday evenings</option>
+              <option>Flexible</option>
+            </select>
+          </div>
+
+          <div class="field-shell">
+            <label for="goal">Your goal with Shoot Buddy</label>
+            <select id="goal" name="goal" required>
+              <option value="" hidden selected>Select one</option>
+              <option>Earn</option>
+              <option>Earn &amp; Learn</option>
+              <option>Earn, Learn &amp; Network</option>
+            </select>
+          </div>
+
+          <input type="hidden" name="source" value="Shoot Buddy Creator Landing" />
+
+          <button type="submit" id="submitBtn">Apply for Shoot Buddy</button>
+        </form>
       </div>
-
-      <div class="section-line"><span>Location &amp; device</span></div>
-
-      <label for="area">Coimbatore Area</label>
-      <select id="area" name="area" required>
-        <option value="" hidden selected>Select your area</option>
-        <option>Gandhipuram / Town Hall / RS Puram</option>
-        <option>Peelamedu / Hope / SITRA</option>
-        <option>Saravanampatti / Kalapatti / Keeranatham</option>
-        <option>Singanallur / Ramanathapuram</option>
-        <option>Sulur</option>
-        <option>Ondipudur / Sulur</option>
-        <option>Vadavalli / P.N. Pudur</option>
-        <option>Kuniamuthur / Ukkadam</option>
-        <option>Neelambur / Chinniyampalayam</option>
-        <option>Thudiyalur / North Coimbatore</option>
-        <option>Outskirts</option>
-        <option>Not from Coimbatore</option>
-      </select>
-
-      <label for="iphoneModel">iPhone Model</label>
-      <select id="iphoneModel" name="iphoneModel" required>
-        <option value="" hidden selected>Select your exact iPhone</option>
-        <option value="17">iPhone 17</option>
-        <option value="17-pro">iPhone 17 Pro</option>
-        <option value="17-pro-max">iPhone 17 Pro Max</option>
-        <option value="air">iPhone Air</option>
-        <option value="16">iPhone 16</option>
-        <option value="16-plus">iPhone 16 Plus</option>
-        <option value="16-pro">iPhone 16 Pro</option>
-        <option value="16-pro-max">iPhone 16 Pro Max</option>
-        <option value="16e">iPhone 16e</option>
-        <option value="15">iPhone 15</option>
-        <option value="15-plus">iPhone 15 Plus</option>
-        <option value="15-pro">iPhone 15 Pro</option>
-        <option value="15-pro-max">iPhone 15 Pro Max</option>
-        <option value="14">iPhone 14</option>
-        <option value="14-plus">iPhone 14 Plus</option>
-        <option value="14-pro">iPhone 14 Pro</option>
-        <option value="14-pro-max">iPhone 14 Pro Max</option>
-        <option value="13-mini">iPhone 13 mini</option>
-        <option value="13">iPhone 13</option>
-        <option value="13-pro">iPhone 13 Pro</option>
-        <option value="13-pro-max">iPhone 13 Pro Max</option>
-        <option value="se-3">iPhone SE (3rd Gen)</option>
-      </select>
-
-      <div class="section-line"><span>Editing &amp; experience</span></div>
-
-      <label for="editingApp">Editing App</label>
-      <select id="editingApp" name="editingApp" required>
-        <option value="" hidden selected>Select your main app</option>
-        <option>CapCut / CapCut Pro</option>
-        <option>CapCut PC</option>
-        <option>DaVinci Resolve</option>
-        <option>VN</option>
-        <option>InShot</option>
-      </select>
-
-      <label for="editingExperience">Editing Experience</label>
-      <select id="editingExperience" name="editingExperience" required>
-        <option value="" hidden selected>How long have you edited?</option>
-        <option>Below 6 months</option>
-        <option>Above 8 months</option>
-        <option>Above 1 year</option>
-      </select>
-
-      <label for="paidWork">Have you done paid work?</label>
-      <select id="paidWork" name="paidWork" required>
-        <option value="" hidden selected>Select an option</option>
-        <option>Yes, regularly</option>
-        <option>Yes, few times</option>
-        <option>Not yet</option>
-      </select>
-
-      <label>Type of edits you have done</label>
-      <div class="check-grid">
-        <label class="check"><input name="editTypes" value="mua" type="checkbox"> Makeup / MUA</label>
-        <label class="check"><input name="editTypes" value="fashion" type="checkbox"> Boutique / Fashion</label>
-        <label class="check"><input name="editTypes" value="automotive" type="checkbox"> Automotive</label>
-        <label class="check"><input name="editTypes" value="business" type="checkbox"> Business reels</label>
-        <label class="check"><input name="editTypes" value="personal" type="checkbox"> Personal branding</label>
-        <label class="check"><input name="editTypes" value="college" type="checkbox"> College functions</label>
-        <label class="check"><input name="editTypes" value="promo" type="checkbox"> Promotional videos</label>
-      </div>
-
-      <div class="section-line"><span>Work mode</span></div>
-
-      <label for="businessClients">Have you worked with business clients?</label>
-      <select id="businessClients" name="businessClients" required>
-        <option value="" hidden selected>Select an option</option>
-        <option>Yes</option>
-        <option>No</option>
-      </select>
-
-      <label for="availability">Availability</label>
-      <select id="availability" name="availability" required>
-        <option value="" hidden selected>When can you shoot?</option>
-        <option>Weekends</option>
-        <option>Weekday evenings</option>
-        <option>Flexible</option>
-      </select>
-
-      <label for="creatorGoal">Creator Goal</label>
-      <select id="creatorGoal" name="creatorGoal" required>
-        <option value="" hidden selected>What do you want from SB?</option>
-        <option>Earn</option>
-        <option>Earn &amp; Learn</option>
-        <option>Earn, Learn &amp; Network</option>
-      </select>
-
-      <!-- For now: normal submit so you see Formspree thank-you page -->
-      <button type="submit">CALCULATE MY TIER ⚡</button>
-    </form>
+    </div>
   </div>
 
+  <footer>
+    No follower‑based selection • Real brands • Tier‑based paid work
+  </footer>
 </div>
 
-<!-- modal + script kept but not currently triggered -->
-
-<footer>SHOOT BUDDY · CREATOR POWERHOUSE · 2025</footer>
+<!-- success modal -->
+<div class="modal-overlay" id="successModal">
+  <div class="modal">
+    <h2>Form received ✅</h2>
+    <p>
+      You’ve been placed in
+      <strong><span id="tierLabel">your Shoot Buddy tier</span></strong>
+      based on your editing app and experience. This tier decides which brand shoots and budgets you see first.
+    </p>
+    <p style="margin-top:6px;">
+      Join our WhatsApp community to become a Shoot Buddy partner and get paid shoot drops directly on your phone.
+    </p>
+    <div class="modal-actions">
+      <a href="https://chat.whatsapp.com/Huufo2mT8Fi5ZCrifn2s9K" target="_blank" rel="noopener">
+        <button class="modal-btn primary" type="button">
+          Join our WhatsApp community
+        </button>
+      </a>
+      <p style="font-size:.75rem;color:var(--muted-soft);margin-top:4px;">
+        Prefer opening the link directly?<br/>
+        <a href="https://chat.whatsapp.com/Huufo2mT8Fi5ZCrifn2s9K" target="_blank" rel="noopener" style="color:var(--neon-soft);text-decoration:none;">
+          https://chat.whatsapp.com/Huufo2mT8Fi5ZCrifn2s9K
+        </a>
+      </p>
+    </div>
+  </div>
 </div>
 
 <script>
-const collegeStatus = document.getElementById("collegeStatus");
-const collegeBlock  = document.getElementById("collegeBlock");
+const form = document.getElementById('creatorForm');
+const submitBtn = document.getElementById('submitBtn');
+const modal = document.getElementById('successModal');
 
-collegeStatus.addEventListener("change", () => {
-  if (collegeStatus.value === "student") {
-    collegeBlock.classList.remove("hidden");
-  } else {
-    collegeBlock.classList.add("hidden");
+const collegeStatus = document.getElementById('collegeStatus');
+const collegeName = document.getElementById('collegeName');
+const department = document.getElementById('department');
+
+const mainTool = document.getElementById('mainTool');
+const expLevel = document.getElementById('expLevel');
+const tierLabel = document.getElementById('tierLabel');
+
+// glow on focus
+document.querySelectorAll('.field-shell input, .field-shell select, .field-shell textarea')
+  .forEach(el => {
+    el.addEventListener('focus', () => {
+      el.parentElement.classList.add('focused');
+    });
+    el.addEventListener('blur', () => {
+      el.parentElement.classList.remove('focused');
+    });
+  });
+
+function updateCollegeFields() {
+  const passedOut = collegeStatus.value === 'Passed Out';
+  collegeName.disabled = passedOut;
+  department.disabled = passedOut;
+
+  if (passedOut) {
+    collegeName.value = '';
+    department.value = '';
+  }
+}
+
+function computeTier() {
+  const tool = (mainTool.value || '').toLowerCase();
+  const exp = expLevel.value;
+
+  // Tier 1 tools: CapCut, DaVinci Resolve, Premiere Pro, Alight Motion, After Effects
+  const isTier1Tool =
+    tool.includes('capcut') ||
+    tool.includes('davinci') ||
+    tool.includes('premiere') ||
+    tool.includes('alight') ||
+    tool.includes('after effects');
+
+  let tier = 'Tier 3 · Learn & earn';
+
+  if (isTier1Tool && exp === 'Above 1 year') {
+    tier = 'Tier 1 · Premium';
+  } else if (isTier1Tool && exp === 'Above 8 months') {
+    tier = 'Tier 2 · Growth';
+  } else if (exp === 'Below 6 months') {
+    tier = 'Tier 3 · Learn & earn';
+  }
+
+  if (tierLabel) tierLabel.textContent = tier;
+}
+
+updateCollegeFields();
+collegeStatus.addEventListener('change', updateCollegeFields);
+
+// Formspree submit handler
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Submitting...';
+
+  const formData = new FormData(form);
+
+  try {
+    const res = await fetch(form.action, {
+      method: 'POST',
+      body: formData,
+      headers: { 'Accept': 'application/json' }
+    });
+
+    if (res.ok) {
+      computeTier();
+      form.reset();
+      updateCollegeFields();
+      modal.classList.add('active');
+    } else {
+      alert('Something went wrong. Please try again or check your connection.');
+    }
+  } catch (err) {
+    alert('Network error. Please try again.');
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Apply for Shoot Buddy';
   }
 });
 </script>
-
 </body>
 </html>
